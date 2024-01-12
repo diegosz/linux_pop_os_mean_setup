@@ -206,14 +206,6 @@ General:
 
 * Disable “Suspend when laptop lid is closed” in General.
 
-Keyboard & Mouse:
-
-    Additional Layout Options:
-
-        Switching to another layout:
-
-            * 
-
 Top Bar:
 
 * Enable “Weekday” and “Date”.

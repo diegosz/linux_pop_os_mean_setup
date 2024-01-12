@@ -119,6 +119,12 @@ sudo apt install -y code
 sudo apt install -y meld
 ```
 
+### Htop
+
+```sh
+sudo apt install -y htop
+```
+
 ### Install with Pop Shop
 
 * Chrome

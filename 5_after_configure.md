@@ -262,5 +262,52 @@ wget -O- -nv https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/too
 && mkdir -p ~/.cache/gitstatus \
 && wget -O- -nv https://github.com/romkatv/gitstatus/releases/download/v1.3.1/gitstatusd-linux-x86_64.tar.gz | tar -xz -C ~/.cache/gitstatus gitstatusd-linux-x86_64
 
-
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions \
+&& rm -rf ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/.git*
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting \
+&& rm -rf ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/.git*
 ```
+
+Download these four ttf files:
+- [MesloLGS NF Regular.ttf](
+       https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf)
+- [MesloLGS NF Bold.ttf](
+       https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf)
+- [MesloLGS NF Italic.ttf](
+       https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf)
+- [MesloLGS NF Bold Italic.ttf](
+       https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf)
+
+Double-click on each file and click "Install". This will make `MesloLGS NF` font available to all applications on your system.
+
+Configure your terminal to use this font:
+
+- **Visual Studio Code**: Open *File → Preferences → Settings* (PC) or
+     *Code → Preferences → Settings* (Mac), enter `terminal.integrated.fontFamily` in the search box at the top of *Settings* tab and set the value below to `MesloLGS NF`.
+     Consult [this screenshot](
+       https://raw.githubusercontent.com/romkatv/powerlevel10k-media/389133fb8c9a2347929a23702ce3039aacc46c3d/visual-studio-code-font-settings.jpg)
+     to see how it should look like or see [this issue](
+       https://github.com/romkatv/powerlevel10k/issues/671) for extra information.
+- **GNOME Terminal** (the default Ubuntu terminal): Open *Terminal → Preferences* and click on the selected profile under *Profiles*. Check *Custom font* under *Text Appearance* and select`MesloLGS NF Regular`.
+
+Configure p10k:
+
+```sh
+zsh
+p10k configure
+```
+
+Options:
+
+- (1) Rainbow
+- (1) Unicode
+- (n) Do not show curren time
+- (1) Angled separator
+- (1) Sharp prompt head
+- (1) Flat prompt tail
+- (1) One line prompt height
+- (1) Compact prompt spacing
+- (1) Few Icons
+- (1) Concise prompt flow
+- (y) Enable transient prompt
+- (1) Verbose instant prompt mode

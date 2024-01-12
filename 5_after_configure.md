@@ -125,6 +125,12 @@ sudo apt install -y meld
 sudo apt install -y htop
 ```
 
+### Tmux
+
+```sh
+sudo apt install -y tmux
+```
+
 ### Install with Pop Shop
 
 * Chrome

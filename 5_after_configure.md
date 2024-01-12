@@ -188,6 +188,7 @@ Mouse & Touchpad:
         * Remove super+l super+h
         * Assign additional super+l to Lock screen
         * Assign additional super+w to Show workspaces
+        * Custom Shortcut: xkill ctrl+alt+backspace
 User:
     * Change avatar image.
 Date & TIme:

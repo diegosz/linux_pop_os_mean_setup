@@ -148,3 +148,17 @@ Restart ssh-agent:
 ```sh
 killall ssh-agent; eval "$(ssh-agent)"
 ```
+
+## History
+
+Clean history in bash:
+
+```sh
+history -cw
+```
+
+Clean history in zsh:
+
+```sh
+history -p
+```

@@ -100,6 +100,12 @@ Right-click context menu in nautilus for admin
 sudo apt install -y nautilus-admin
 ```
 
+### Nautilus open in Vscode
+
+```sh
+wget -qO- https://raw.githubusercontent.com/harry-cpp/code-nautilus/master/install.sh | bash
+```
+
 ### Git related packages
 
 ```sh

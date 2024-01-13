@@ -128,3 +128,9 @@ sudo rsync -avuP ~/.pki $BACKUP/
 sudo rsync -avuP ~/.profile $BACKUP/
 sudo rsync -avuP ~/.vscode $BACKUP/
 ```
+
+## Change comment of ssh key
+
+```sh
+ssh-keygen -c -C "some clever comment" -f ~/.ssh/my_private_key
+```

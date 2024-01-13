@@ -258,6 +258,15 @@ eval "$(ssh-agent -s)" #works in bash
 ssh-add ~/.ssh/id_ed25519
 ```
 
+## bash git flow completion
+
+```sh
+sudo apt install -y bash-completion
+
+mkdir -p ~/.bash_completion
+wget -nv https://raw.githubusercontent.com/bobthecow/git-flow-completion/master/git-flow-completion.bash -O ~/.bash_completion/git-flow-completion.bash
+```
+
 ## zsh and oh-my-zsh
 
 ```sh

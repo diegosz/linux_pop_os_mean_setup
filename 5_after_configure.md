@@ -5,6 +5,11 @@ References:
 - https://mutschler.dev/linux/pop-os-post-install/
 - https://blog.zachinachshon.com/storage-volume/
 - https://github.com/unixorn/fzf-zsh-plugin
+- https://github.com/bobthecow/git-flow-completion
+- https://medium.com/@kjdeluna/upgrade-your-terminal-experience-with-zsh-oh-my-zsh-and-powerlevel10k-d2aabf145112
+- https://unix.stackexchange.com/questions/657256/autocompletion-of-makefile-with-makro-in-zsh-not-correct-works-in-bash
+- https://unix.stackexchange.com/questions/111718/command-history-in-zsh
+
 
 ## Permanently mount additional disk
 
@@ -64,7 +69,7 @@ sudo apt dist-upgrade
 sudo apt autoremove
 sudo apt autoclean
 sudo fwupdmgr get-devices
-sudo fwupdmgr get-updates
+sudo fwupdmgr get-updatesgit-flow-completion.bash
 sudo fwupdmgr update
 flatpak update
 sudo pop-upgrade recovery upgrade from-release # this updates the recovery partition
@@ -285,6 +290,15 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/
 
 git clone --depth 1 https://github.com/unixorn/fzf-zsh-plugin.git ~/.oh-my-zsh/custom/plugins/fzf-zsh-plugin \
 && rm -rf ~/.oh-my-zsh/custom/plugins/fzf-zsh-plugin/.git*
+
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
+Do you want to enable fuzzy auto-completion? ([y]/n) y
+Do you want to enable key bindings? ([y]/n) y
+Do you want to update your shell configuration files? ([y]/n) n
+
+git clone https://github.com/bobthecow/git-flow-completion ~/.oh-my-zsh/custom/plugins/git-flow-completion \
+&& rm -rf ~/.oh-my-zsh/custom/plugins/git-flow-completion/.git*
 ```
 
 Download these four ttf files:

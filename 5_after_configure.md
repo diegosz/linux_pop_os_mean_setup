@@ -235,7 +235,6 @@ Top Bar:
 * Enable “Weekday” and “Date”.
 * Enable Calendar “Week Numbers”.
 
-
 ## Gnome Extension
 
 * Change Lock screen background, using GNOME-Shell extension: https://extensions.gnome.org/extension/1476/unlock-dialog-background/
@@ -344,3 +343,9 @@ p10k configure
 ```
 
 Add fzf-zsh-plugin to your plugin list - edit ~.zshrc and change plugins=(...) to plugins=(... fzf-zsh-plugin)
+
+Make zsh the default shell:
+
+```sh
+chsh -s $(which zsh)
+```

@@ -4,6 +4,7 @@ References:
 
 - https://mutschler.dev/linux/pop-os-post-install/
 - https://blog.zachinachshon.com/storage-volume/
+- https://github.com/unixorn/fzf-zsh-plugin
 
 ## Permanently mount additional disk
 
@@ -272,6 +273,9 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/p
 && rm -rf ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/.git*
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting \
 && rm -rf ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/.git*
+
+git clone --depth 1 https://github.com/unixorn/fzf-zsh-plugin.git ~/.oh-my-zsh/custom/plugins/fzf-zsh-plugin \
+&& rm -rf ~/.oh-my-zsh/custom/plugins/fzf-zsh-plugin/.git*
 ```
 
 Download these four ttf files:
@@ -301,19 +305,19 @@ Configure p10k:
 ```sh
 zsh
 p10k configure
+# Options:
+# - (1) Rainbow
+# - (1) Unicode
+# - (n) Do not show curren time
+# - (1) Angled separator
+# - (1) Sharp prompt head
+# - (1) Flat prompt tail
+# - (1) One line prompt height
+# - (1) Compact prompt spacing
+# - (1) Few Icons
+# - (1) Concise prompt flow
+# - (y) Enable transient prompt
+# - (1) Verbose instant prompt mode
 ```
 
-Options:
-
-- (1) Rainbow
-- (1) Unicode
-- (n) Do not show curren time
-- (1) Angled separator
-- (1) Sharp prompt head
-- (1) Flat prompt tail
-- (1) One line prompt height
-- (1) Compact prompt spacing
-- (1) Few Icons
-- (1) Concise prompt flow
-- (y) Enable transient prompt
-- (1) Verbose instant prompt mode
+Add fzf-zsh-plugin to your plugin list - edit ~.zshrc and change plugins=(...) to plugins=(... fzf-zsh-plugin)

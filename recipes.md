@@ -160,5 +160,6 @@ history -cw
 Clean history in zsh:
 
 ```sh
-history -p
+# history -p
+truncate -s 0 ~/.zsh_history
 ```

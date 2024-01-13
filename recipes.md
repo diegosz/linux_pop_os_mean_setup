@@ -142,3 +142,9 @@ Show key in file:
 ```sh
 ssh-keygen -lf ~/.ssh/my_private_key
 ```
+
+Restart ssh-agent:
+
+```sh
+killall ssh-agent; eval "$(ssh-agent)"
+```

@@ -125,22 +125,13 @@ git-lfs install
 sudo apt install -y code
 ```
 
-### Meld
+### Tools
 
 ```sh
 sudo apt install -y meld
-```
-
-### Htop
-
-```sh
 sudo apt install -y htop
-```
-
-### Tmux
-
-```sh
 sudo apt install -y tmux
+sudo apt install -y tree
 ```
 
 ### Install with Pop Shop

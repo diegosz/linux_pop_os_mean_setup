@@ -132,6 +132,7 @@ sudo apt install -y meld
 sudo apt install -y htop
 sudo apt install -y tmux
 sudo apt install -y tree
+sudo apt install -y imagemagick-6.q16hdri libmagickcore-6.q16hdri-6-extra
 ```
 
 ### Install with Pop Shop

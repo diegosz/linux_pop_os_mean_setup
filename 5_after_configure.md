@@ -361,6 +361,8 @@ sudo apt install -y kopia
 sudo apt install -y kopia-ui
 ```
 
+Set kopia-ui to launch at startup so it could do the scheduled snapshots.
+
 Check disk throughput to select repository compression:
 
 ```sh

@@ -2,14 +2,13 @@
 
 References:
 
-- https://mutschler.dev/linux/pop-os-post-install/
-- https://blog.zachinachshon.com/storage-volume/
-- https://github.com/unixorn/fzf-zsh-plugin
-- https://github.com/bobthecow/git-flow-completion
-- https://medium.com/@kjdeluna/upgrade-your-terminal-experience-with-zsh-oh-my-zsh-and-powerlevel10k-d2aabf145112
-- https://unix.stackexchange.com/questions/657256/autocompletion-of-makefile-with-makro-in-zsh-not-correct-works-in-bash
-- https://unix.stackexchange.com/questions/111718/command-history-in-zsh
-
+- [Pop!_OS: Things to do after installation (Apps, Settings, and Tweaks) | mutschler.dev](https://mutschler.dev/linux/pop-os-post-install/)
+- [Mount Storage Volumes onto Linux Operating Systems | Zachi Nachshon BlogMount Storage Volumes onto Linux Operating Systems | Zachi Nachshon Blog](https://blog.zachinachshon.com/storage-volume/)
+- [GitHub - unixorn/fzf-zsh-plugin: ZSH plugin to enable fzf searches of a lot more stuff - docker, tmux, homebrew and more.](https://github.com/unixorn/fzf-zsh-plugin)
+- [GitHub - bobthecow/git-flow-completion: Bash, Zsh and fish completion support for git-flow.](https://github.com/bobthecow/git-flow-completion)
+- [Upgrade your Terminal experience with Zsh, Oh My Zsh, and powerlevel10k! | by kjdeluna | Medium](https://medium.com/@kjdeluna/upgrade-your-terminal-experience-with-zsh-oh-my-zsh-and-powerlevel10k-d2aabf145112)
+- [make - Autocompletion of makefile with makro in zsh not correct (works in bash) - Unix & Linux Stack Exchange](https://unix.stackexchange.com/questions/657256/autocompletion-of-makefile-with-makro-in-zsh-not-correct-works-in-bash)
+- [Command history in Zsh - Unix & Linux Stack Exchange](https://unix.stackexchange.com/questions/111718/command-history-in-zsh)
 
 ## Permanently mount additional disk
 
@@ -40,7 +39,7 @@ sudo chown -R $USER:$USER /vol
 
 ## Set hostname
 
-If you need some creativity: https://namingschemes.com/Main_Page
+If you need some creativity: <https://namingschemes.com/Main_Page>
 
 ```sh
 hostnamectl set-hostname meanmachine
@@ -58,7 +57,8 @@ sudo locale-gen pt_BR.UTF.8
 sudo update-locale LANG=en_US.UTF-8
 ```
 
-In Region Settings open “Manage Installed Languages”, do not update these, but first remove the unnecessary ones. Then reopen “languages” and update these.
+In Region Settings open “Manage Installed Languages”, do not update these, but
+first remove the unnecessary ones. Then reopen “languages” and update these.
 
 ## Install updates and reboot
 
@@ -137,26 +137,26 @@ sudo apt install -y imagemagick-6.q16hdri libmagickcore-6.q16hdri-6-extra
 
 ### Install with Pop Shop
 
-* Chrome
-* KeePassXC
+- Chrome
+- KeePassXC
 
 ## Tweaks
 
-* Set Tile windows.
+- Set Tile windows.
 
-* Add Floating Windows Exceptions:
-    * Settings
-    * Calculator
+- Add Floating Windows Exceptions:
+  - Settings
+  - Calculator
 
-* Reorder Favorites on Dock (Terminal, Nautilus, Vscode, Firefox)
-* Remove Pop Show from Dock
-* Remove Settings from Dock
+- Reorder Favorites on Dock (Terminal, Nautilus, Vscode, Firefox)
+- Remove Pop Show from Dock
+- Remove Settings from Dock
 
-* Hit META+A and uninstall: Contacts, Calendar, Geary, Weather.
+- Hit META+A and uninstall: Contacts, Calendar, Geary, Weather.
 
-* In nautilus add bookmark to /vol
+- In nautilus add bookmark to /vol
 
-* History search in terminal using page up and page down:
+- History search in terminal using page up and page down:
 
 ```sh
 sudo nano /etc/inputrc
@@ -167,48 +167,48 @@ sudo nano /etc/inputrc
 
 ## Settings
 
-* Turn off bluetooth
+- Turn off bluetooth
 
 Desktop:
     Desktop Options:
-        * Show Maximize Button.
+        - Show Maximize Button.
     Background:
-        * Change Background.
+        - Change Background.
     Dock:
-        * Deactivate Extend dock to the edges of the screen.
-        * Deactivate Show Launcher Incon in Dock.
-        * Deactivate Show Workspaces Icon in Dock.
-        * Deactivate Show Applications Icon in Dock.
-        * Dock visibility: intelligently hide
-        * Show Dock on Display: All Displays
-        * Dock Size: Small
+        - Deactivate Extend dock to the edges of the screen.
+        - Deactivate Show Launcher Icon in Dock.
+        - Deactivate Show Workspaces Icon in Dock.
+        - Deactivate Show Applications Icon in Dock.
+        - Dock visibility: intelligently hide
+        - Show Dock on Display: All Displays
+        - Dock Size: Small
     Workspaces:
-        * Set Fixed Number of Workspaces.
+        - Set Fixed Number of Workspaces.
 Privacy:
     File History & Trash:
-        * Automatically delete file history in 30 days
-        * Automatically delete temporary files and trash in 30 days
+        - Automatically delete file history in 30 days
+        - Automatically delete temporary files and trash in 30 days
     Screen:
-        * Turn of screen after 15 min with automatic screen lock.
+        - Turn of screen after 15 min with automatic screen lock.
 Sound:
-    * Mute mic
+    - Mute mic
 Power:
-    * Disable Automatic Suspend.
-    * Turn on hibernate for power button.
-    * Enable Show Battery Percentage.
+    - Disable Automatic Suspend.
+    - Turn on hibernate for power button.
+    - Enable Show Battery Percentage.
 Displays:
-    * Turn on night mode Manual Schedule 20:00 to 06:00
+    - Turn on night mode Manual Schedule 20:00 to 06:00
 Mouse & Touchpad:
-    * Turn on natural scroll for mouse touchpad.
-    * Go through keyboard shortcuts and adapt:
-        * Remove super+l super+h
-        * Assign additional super+l to Lock screen
-        * Assign additional super+w to Show workspaces
-        * Custom Shortcut: xkill ctrl+alt+backspace
+    - Turn on natural scroll for mouse touchpad.
+    - Go through keyboard shortcuts and adapt:
+        - Remove super+l super+h
+        - Assign additional super+l to Lock screen
+        - Assign additional super+w to Show workspaces
+        - Custom Shortcut: xkill ctrl+alt+backspace
 User:
-    * Change avatar image.
+    - Change avatar image.
 Date & TIme:
-    * Change clock to 24h format
+    - Change clock to 24h format
 
 ## Gnome-tweaks
 
@@ -220,20 +220,23 @@ Make the following changes:
 
 General:
 
-* Disable “Suspend when laptop lid is closed” in General.
+- Disable “Suspend when laptop lid is closed” in General.
 
 Top Bar:
 
-* Enable “Weekday” and “Date”.
-* Enable Calendar “Week Numbers”.
+- Enable “Weekday” and “Date”.
+- Enable Calendar “Week Numbers”.
 
 ## Gnome Extension
 
-* Change Lock screen background, using GNOME-Shell extension: https://extensions.gnome.org/extension/1476/unlock-dialog-background/
+- Change Lock screen background, using GNOME-Shell extension:
+  <https://extensions.gnome.org/extension/1476/unlock-dialog-background/>
 
-* Show Numlock and Capslock status on the panel, using GNOME-Shell extension: https://extensions.gnome.org/extension/1532/lock-keys/
+- Show Numlock and Capslock status on the panel, using GNOME-Shell extension:
+  <https://extensions.gnome.org/extension/1532/lock-keys/>
 
-* Unblank lock screen, using GNOME-Shell extension: https://extensions.gnome.org/extension/1414/unblank/
+- Unblank lock screen, using GNOME-Shell extension:
+  <https://extensions.gnome.org/extension/1414/unblank/>
 
 ## SSH keys
 
@@ -243,7 +246,9 @@ If I want to create a new SSH key, I run e.g.:
 ssh-keygen -t ed25519 -C "my-new-key"
 ```
 
-Usually, however, I restore my .ssh folder from my backup. Either way, afterwards, one needs to add the file containing your key, usually id_rsa or id_ed25519, to the ssh-agent:
+Usually, however, I restore my `.ssh` folder from my backup. Either way,
+afterwards, one needs to add the file containing your key, usually id_rsa or
+id_ed25519, to the ssh-agent:
 
 ```sh
 # First set the right permission to the restored private keys
@@ -293,6 +298,7 @@ git clone https://github.com/bobthecow/git-flow-completion ~/.oh-my-zsh/custom/p
 ```
 
 Download these four ttf files:
+
 - [MesloLGS NF Regular.ttf](
        https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf)
 - [MesloLGS NF Bold.ttf](
@@ -302,7 +308,8 @@ Download these four ttf files:
 - [MesloLGS NF Bold Italic.ttf](
        https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf)
 
-Double-click on each file and click "Install". This will make `MesloLGS NF` font available to all applications on your system.
+Double-click on each file and click "Install". This will make `MesloLGS NF` font
+available to all applications on your system.
 
 Configure your terminal to use this font:
 
@@ -334,9 +341,10 @@ p10k configure
 # - (1) Verbose instant prompt mode
 ```
 
-Add fzf-zsh-plugin to your plugin list - edit ~.zshrc and change plugins=(...) to plugins=(... fzf-zsh-plugin)
+Add `fzf-zsh-plugin` to your plugin list - edit `~.zshrc` and change plugins=(...)
+to plugins=(... fzf-zsh-plugin)
 
-Make zsh the default shell:
+Make **zsh** the default shell:
 
 ```sh
 chsh -s $(which zsh)
@@ -346,13 +354,13 @@ chsh -s $(which zsh)
 
 References:
 
-- https://kopia.io/docs/installation/#linux-installation-using-apt-debian-ubuntu
-- https://kopia.io/docs/faqs/
-- https://kopia.io/docs/getting-started/
-- https://kopia.io/docs/advanced/compression/
-- https://www.cyberciti.biz/faq/howto-linux-unix-test-disk-performance-with-dd-command/
-- https://kopia.io/docs/advanced/kopiaignore/
-- https://kopia.io/docs/mounting/
+- [Download & Installation | Kopiakopia-svg](https://kopia.io/docs/installation/#linux-installation-using-apt-debian-ubuntu)
+- [Frequently Asked Questions | Kopiakopia-svg](https://kopia.io/docs/faqs/)
+- [Getting Started Guide | Kopiakopia-svg](https://kopia.io/docs/getting-started/)
+- [Compression | Kopiakopia-svg](https://kopia.io/docs/advanced/compression/)
+- [Linux and Unix Test Disk I/O Performance With dd Command - nixCraft](https://www.cyberciti.biz/faq/howto-linux-unix-test-disk-performance-with-dd-command/)
+- [Ignoring Files and Folders in Snapshots | Kopiakopia-svg](https://kopia.io/docs/advanced/kopiaignore/)
+- [Mounting | Kopiakopia-svg](https://kopia.io/docs/mounting/)
 
 ```sh
 curl -s https://kopia.io/signing-key | sudo gpg --dearmor -o /etc/apt/keyrings/kopia-keyring.gpg
@@ -361,7 +369,7 @@ sudo apt install -y kopia
 sudo apt install -y kopia-ui
 ```
 
-Set kopia-ui to launch at startup so it could do the scheduled snapshots.
+Set `kopia-ui` to launch at startup so it could do the scheduled snapshots.
 
 Check disk throughput to select repository compression:
 
@@ -423,11 +431,15 @@ NOTICE: The provided input file is too big, using first 134.2 MB.
 rm -v -i ./test1.img
 ```
 
-As soon as the throughput of compression is higher than I/O, compression is no longer the bottleneck. Therefore, any higher compression basically comes as free.
+As soon as the throughput of compression is higher than I/O, compression is no
+longer the bottleneck. Therefore, any higher compression basically comes as
+free.
 
-In this example, for a repository in (/dev/sda) /vol we could use deflate-default for a balance betwenn speed/memory/compression.
+In this example, for a repository in (/dev/sda) /vol we could use
+deflate-default for a balance between speed/memory/compression.
 
-For a repository in /dev/sdb we could use deflate-default for a balance betwenn speed/memory/compression.
+For a repository in /dev/sdb we could use deflate-default for a balance between
+speed/memory/compression.
 
 We are going to set the compression globally:
 
@@ -468,7 +480,8 @@ tee ~/.kopiaignore << END
 END
 ```
 
-Inspect if there are more files or folders to ignore and edit `~/.kopiaignore` if needed.
+Inspect if there are more files or folders to ignore and edit `~/.kopiaignore`
+if needed.
 
 Create a local repository in `/vol/_backup`.
 
@@ -477,7 +490,9 @@ This snapshots are just in case meanwhile we finish the machine setup.
 
 Create an snapshot using the new policy.
 
-Let's check if every thing was ok with the snapshot and if we need to ignore more files or folders, if that is the case, edit `~/.kopiaignore` acordingly, delete the snapshot, take a new one and do the verification again.
+Let's check if every thing was ok with the snapshot and if we need to ignore
+more files or folders, if that is the case, edit `~/.kopiaignore` acordingly,
+delete the snapshot, take a new one and do the verification again.
 
 To mount a particular snapshot use the root id:
 
@@ -495,7 +510,8 @@ kopia mount all /tmp/mnt &
 umount /tmp/mnt
 ```
 
-When the special path `all` is used, the whole repository with its latest snapshot version is mounted.
+When the special path `all` is used, the whole repository with its latest
+snapshot version is mounted.
 
 ### Set development snapshot policy
 

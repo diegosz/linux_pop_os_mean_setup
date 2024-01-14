@@ -22,4 +22,4 @@ ctrl+b + ctrl+right arrow to resize pane horizontally.
 
 ## Desktop
 
-xkill : ctrl+alt+backspace
+`xkill` : ctrl+alt+backspace

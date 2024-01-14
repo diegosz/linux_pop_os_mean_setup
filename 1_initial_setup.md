@@ -8,4 +8,3 @@ delete swap partition
 resize lvm partition to full space
 
 reboot in recovery mode
-

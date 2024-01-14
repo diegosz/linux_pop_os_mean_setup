@@ -2,17 +2,17 @@
 
 References:
 
-- https://mutschler.dev/linux/pop-os-btrfs-22-04/
-- https://journal.chumaumenze.com/entries/suspending-to-disk-in-ubuntu-based-distro-with-btrfs-filesystem
-- https://gist.github.com/dawaltconley/8cb4c3cfac7da394a58fab363628bf63
-- https://forum.manjaro.org/t/howto-enable-and-configure-hibernation-with-btrfs/51253
-- https://btrfs.readthedocs.io/en/latest/Swapfile.html
+- [Pop!_OS 22.04: installation guide with btrfs, luks encryption and auto snapshots with timeshift | mutschler.dev](https://mutschler.dev/linux/pop-os-btrfs-22-04/)
+- [Suspending to Disk in Ubuntu-based Distro with BTRFS filesystem | Chuma's Journal](https://journal.chumaumenze.com/entries/suspending-to-disk-in-ubuntu-based-distro-with-btrfs-filesystem)
+- [Enabling hibernation with full disk encryption on Pop!_OS 21.04. · GitHub](https://gist.github.com/dawaltconley/8cb4c3cfac7da394a58fab363628bf63)
+- [[HowTo] Enable and configure hibernation with BTRFS - Tutorials - Manjaro Linux Forum](https://forum.manjaro.org/t/howto-enable-and-configure-hibernation-with-btrfs/51253)
+- [Swapfile — BTRFS  documentation](https://btrfs.readthedocs.io/en/latest/Swapfile.html)
 
 1. Do mutschler_pop-os-btrfs-22-04 Step 1 complete.
 
 2. Do mutschler_pop-os-btrfs-22-04 Step 2 complete.
 
-3. Start mutschler_pop-os-btrfs-22-04 Step 3
+3. Start mutschler_pop-os-btrfs-22-04 Step 3.
 
 ```sh
 sudo -i
@@ -54,13 +54,13 @@ btrfs subvolume create /mnt/@swap
 btrfs subvolume list /mnt
 ```
 
-This tutorial and many other are using btrfs version 6.1 and above,
-it has specific commads for creating swapfiles and also for geting
-the offset that we need to update the kernel.
+This tutorial and many other are using btrfs version 6.1 and above, it has
+specific commands for creating swapfiles and also for getting the offset that we
+need to update the kernel.
 
-At this moment (2023-01-09) the last stable btrfs version is: v5.16.2,
-so we need to get the create the swapfile manually and get the offset
-in another creative way.
+At this moment (2023-01-09) the last stable btrfs version is: v5.16.2, so we
+need to get the create the swapfile manually and get the offset in another
+creative way.
 
 ```sh
 free -h
@@ -86,7 +86,8 @@ ryptswap!# &!' /etc/fstab
 sudo sed -i 's!^cryptswap!# &!' /etc/crypttab
 ```
 
-6. We found the swapfile offset following some steps from manjaro_howto-enable-and-configure-hibernation-with-btrfs:
+6. We found the swapfile offset following some steps from
+   manjaro_howto-enable-and-configure-hibernation-with-btrfs:
 
 ```sh
 curl -s "https://raw.githubusercontent.com/osandov/osandov-linux/master/scripts/btrfs_map_physical.c" > bmp.c
@@ -138,7 +139,8 @@ cat /mnt/@/etc/crypttab
 cryptdata UUID=f5587dee-374e-4ab9-afdd-b6a4f5530254 none luks,discard
 ```
 
-Adjust configuration of kernelstub. Here you need to add rootflags=subvol=@ to the "user" kernel options:
+Adjust configuration of kernelstub. Here you need to add rootflags=subvol=@ to
+the "user" kernel options:
 
 ```sh
 nano /mnt/@/etc/kernelstub/configuration
@@ -175,7 +177,7 @@ nano /mnt/@/etc/kernelstub/configuration
 
 VERY IMPORTANT: Don’t forget to put a comma after "splash"
 
-Adjust configuration of systemd bootloader
+Adjust configuration of systemd bootloader:
 
 ```sh
 mount /dev/sdb1 /mnt/@/boot/efi
@@ -188,7 +190,8 @@ cat /mnt/@/boot/efi/loader/entries/Pop_OS-current.conf
 # options root=UUID=UUID_of_data-root ro quiet loglevel=0 systemd.show_status=false splash rootflags=subvol=@
 ```
 
-Optionally, I like to add a timeout to the systemd boot menu in order to easily access the recovery partition:
+Optionally, I like to add a timeout to the systemd boot menu in order to easily
+access the recovery partition:
 
 ```sh
 echo "timeout 3" >> /mnt/@/boot/efi/loader/loader.conf
@@ -232,7 +235,8 @@ resume=UUID=8062bdbc-fb55-4f0d-8426-033241b86402 resume_offset=902840
 update-initramfs -c -k all
 ```
 
-9. We continue mutschler_pop-os-btrfs-22-04 from "Step 4: Reboot, some checks, and system updates":
+9. We continue mutschler_pop-os-btrfs-22-04 from "Step 4: Reboot, some checks,
+   and system updates":
 
 ```sh
 # Exit the chroot.
@@ -240,7 +244,9 @@ update-initramfs -c -k all
 exit
 ```
 
-Close the terminal and finally hit Reboot Device on the installer app. Cross your fingers! If all went well you should see a passphrase prompt, where you enter the luks passphrase and your system should boot.
+Close the terminal and finally hit Reboot Device on the installer app. Cross
+your fingers! If all went well you should see a passphrase prompt, where you
+enter the luks passphrase and your system should boot.
 
 ```sh
 sudo mount -av
@@ -268,8 +274,8 @@ Swap:           32Gi          0B        32Gi
 
 sudo btrfs filesystem show /
 Label: none  uuid: 8062bdbc-fb55-4f0d-8426-033241b86402
-	Total devices 1 FS bytes used 40.77GiB
-	devid    1 size 467.92GiB used 51.02GiB path /dev/mapper/data-root
+    Total devices 1 FS bytes used 40.77GiB
+    devid    1 size 467.92GiB used 51.02GiB path /dev/mapper/data-root
 
 sudo btrfs subvolume list /
 ID 256 gen 600 top level 5 path @
@@ -279,8 +285,8 @@ ID 258 gen 288 top level 5 path @swap
 sudo systemctl enable fstrim.timer
 
 cat /etc/lvm/lvm.conf | grep issue_discards
-# 	# Configuration option devices/issue_discards.
-# 	issue_discards = 1
+#   # Configuration option devices/issue_discards.
+#   issue_discards = 1
 
 # If all look’s good, let’s update and upgrade the system:
 sudo apt update
@@ -292,7 +298,3 @@ flatpak update
 ```
 
 Reboot.
-
-
-
-

@@ -2,7 +2,8 @@
 
 ## Restore from Backup
 
-I mount my luks encrypted backup storage drive using nautilus and use rsync to copy over my files and important configuration scripts:
+I mount my luks encrypted backup storage drive using nautilus and use rsync to
+copy over my files and important configuration scripts:
 
 ```sh
 export BACKUP=/media/$USER/UUIDOFBACKUPDRIVE/@home/$USER/
@@ -31,7 +32,9 @@ sudo chown -R $USER:$USER /home/$USER
 
 ## Virtual machines: Quickemu and other stuff
 
-I used to set up KVM, Qemu, virt-manager and gnome-boxes as this is much faster as VirtualBox. However, I have found a much easier tool for most tasks: Quickqemu which uses the snap package Qemu-virgil:
+I used to set up KVM, Qemu, virt-manager and gnome-boxes as this is much faster
+as VirtualBox. However, I have found a much easier tool for most tasks:
+Quickqemu which uses the snap package Qemu-virgil:
 
 ```sh
 git clone https://github.com/wmutschl/quickemu ~/quickemu
@@ -61,7 +64,8 @@ sudo chattr +C ~/.local/share/libvirt
 ## Networking
 OpenSSH Server
 
-I sometimes access my linux machine via ssh from other machines, for this I install the OpenSSH server:
+I sometimes access my linux machine via ssh from other machines, for this I
+install the OpenSSH server:
 
 sudo apt install openssh-server
 
@@ -72,25 +76,28 @@ sudo nano /etc/ssh/sshd_config
 to disable password login and to allow for X11forwarding.
 Nextcloud
 
-I have all my files synced to my own Nextcloud server, so I need the sync client:
+I have all my files synced to my own Nextcloud server, so I need the sync
+client:
 
+```sh
 sudo apt install -y nextcloud-desktop
+```
 
 Open Nextcloud and set it up. Recheck options.
 OpenConnect and OpenVPN
 
+```sh
 sudo apt install -y openconnect network-manager-openconnect network-manager-openconnect-gnome
 sudo apt install -y openvpn network-manager-openvpn network-manager-openvpn-gnome
+```
 
-Go to Settings-Network-VPN and add openconnect for my university VPN and openvpn for ProtonVPN, check connections.
+Go to Settings-Network-VPN and add openconnect for my university VPN and openvpn
+for ProtonVPN, check connections.
 
 ## Security steps with Yubikey
 
-I have two Yubikeys and use them
-
-    as second-factor for all admin/sudo tasks
-    to unlock my luks encrypted partitions
-    for my private GPG key
+I have two Yubikeys and use them as second-factor for all admin/sudo tasks to
+unlock my luks encrypted partitions for my private GPG key
 
 For this I need to install several packages:
 
@@ -122,7 +129,8 @@ Make sure that OpenPGP and PIV are enabled on both Yubikeys as shown above.
 
 ## Yubikey: two-factor authentication for admin/sudo password
 
-Let’s set up the Yubikeys as second-factor for everything related to sudo using the common-auth pam.d module:
+Let’s set up the Yubikeys as second-factor for everything related to sudo using
+the common-auth pam.d module:
 
 ```sh
 pamu2fcfg > ~/u2f_keys # When your device begins flashing, touch the metal contact to confirm the association. You might need to insert a user pin as well
@@ -132,11 +140,13 @@ sudo mv ~/u2f_keys /etc/u2f_keys
 echo "auth    required                        pam_u2f.so nouserok authfile=/etc/u2f_keys cue" | sudo tee -a /etc/pam.d/common-auth
 ```
 
-Before you close the terminal, open a new one and check whether you can do sudo echo test
+Before you close the terminal, open a new one and check whether you can do sudo
+echo test.
 
 ## Yubikey: two-factor authentication for luks partitions
 
-Let’s set up the Yubikeys as second-factor to unlock the luks partitions. If you have brand new keys, then create a new key on them:
+Let’s set up the Yubikeys as second-factor to unlock the luks partitions. If you
+have brand new keys, then create a new key on them:
 
 ```sh
 ykpersonalize -2 -ochal-resp -ochal-hmac -ohmac-lt64 -oserial-api-visible #BE CAREFUL TO NOT OVERWRITE IF YOU HAVE ALREADY DONE THIS
@@ -158,7 +168,9 @@ sudo update-initramfs -u
 
 ## Yubikey: private GPG key
 
-Let’s use the private GPG key on the Yubikey (a tutorial on how to put it there is taken from Heise or YubiKey-Guide). My public key is given in a file called /home/$USER/.gnupg/public.asc:
+Let’s use the private GPG key on the Yubikey (a tutorial on how to put it there
+is taken from Heise or YubiKey-Guide). My public key is given in a file called
+/home/$USER/.gnupg/public.asc:
 
 ```sh
 sudo systemctl enable pcscd

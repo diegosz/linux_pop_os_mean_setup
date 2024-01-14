@@ -487,7 +487,7 @@ kopia mount kcac3c69f604a9eeb3e7dbdd8c5135a17 /tmp/mnt &
 umount /tmp/mnt
 ```
 
-To mount the `latest` snapshots of the repository:
+To mount the `latest` snapshot of all the policies of the repository:
 
 ```sh
 mkdir /tmp/mnt
@@ -496,3 +496,17 @@ umount /tmp/mnt
 ```
 
 When the special path `all` is used, the whole repository with its latest snapshot version is mounted.
+
+### Set development snapshot policy
+
+Create a `.kopiaignore` file for the `$HOME/_dev` folder:
+
+```
+tee ~/_dev/.kopiaignore << END
+# Ignore folders within the parent directory
+/hot
+
+END
+```
+
+Create a policy for doing automatic snapshots every 12 hours of `$HOME/_dev`.

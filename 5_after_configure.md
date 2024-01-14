@@ -349,3 +349,156 @@ Make zsh the default shell:
 ```sh
 chsh -s $(which zsh)
 ```
+
+## kopia backup
+
+References:
+
+- https://kopia.io/docs/installation/#linux-installation-using-apt-debian-ubuntu
+- https://kopia.io/docs/faqs/
+- https://kopia.io/docs/getting-started/
+- https://kopia.io/docs/advanced/compression/
+- https://www.cyberciti.biz/faq/howto-linux-unix-test-disk-performance-with-dd-command/
+- https://kopia.io/docs/advanced/kopiaignore/
+- https://kopia.io/docs/mounting/
+
+```sh
+curl -s https://kopia.io/signing-key | sudo gpg --dearmor -o /etc/apt/keyrings/kopia-keyring.gpg
+echo "deb [signed-by=/etc/apt/keyrings/kopia-keyring.gpg] http://packages.kopia.io/apt/ stable main" | sudo tee /etc/apt/sources.list.d/kopia.list\nsudo apt update
+sudo apt install -y kopia
+sudo apt install -y kopia-ui
+```
+
+Check disk throughput to select repository compression:
+
+```sh
+dd if=/dev/zero of=/vol/test1.img bs=1G count=1 oflag=dsync
+1+0 records in
+1+0 records out
+1073741824 bytes (1.1 GB, 1.0 GiB) copied, 3.82768 s, 281 MB/s
+
+kopia benchmark compression --data-file=/vol/test1.img
+NOTICE: The provided input file is too big, using first 134.2 MB.
+     Compression                Compressed   Throughput   Allocs   Usage
+------------------------------------------------------------------------------------------------
+  0. s2-parallel-8              2.6 KB       6.8 GB/s     1097     17 MB
+  1. s2-parallel-4              2.6 KB       6.8 GB/s     974      15.9 MB
+  2. s2-default                 2.6 KB       4.8 GB/s     1116     18.1 MB
+  3. pgzip                      188.7 KB     3.7 GB/s     1205     28 MB
+  4. s2-better                  2.6 KB       3.5 GB/s     1053     22.3 MB
+  5. pgzip-best-speed           188.8 KB     3.5 GB/s     1211     29.5 MB
+  6. deflate-default            132.6 KB     3.2 GB/s     30       1.6 MB
+  7. deflate-best-speed         132.7 KB     2.3 GB/s     30       1.3 MB
+  8. zstd-fastest               26.6 KB      2.1 GB/s     6223     9.9 MB
+  9. zstd                       14.4 KB      1.9 GB/s     3137     19.3 MB
+ 10. zstd-better-compression    14.4 KB      1.3 GB/s     3136     39 MB
+ 11. gzip-best-speed            162.9 KB     1.1 GB/s     37       1.7 MB
+ 12. gzip                       130.5 KB     357.4 MB/s   33       1.1 MB
+ 13. gzip-best-compression      130.5 KB     353.6 MB/s   33       1.1 MB
+ 14. pgzip-best-compression     140.9 KB     97.5 MB/s    1301     45.2 MB
+ 15. deflate-best-compression   138.2 KB     76.4 MB/s    31       1.7 MB
+
+rm -v -i /vol/test1.img
+
+dd if=/dev/zero of=./test1.img bs=1G count=1 oflag=dsync
+1+0 records in
+1+0 records out
+1073741824 bytes (1.1 GB, 1.0 GiB) copied, 0.943067 s, 1.1 GB/s
+
+kopia benchmark compression --data-file=./test1.img
+NOTICE: The provided input file is too big, using first 134.2 MB.
+     Compression                Compressed   Throughput   Allocs   Usage
+------------------------------------------------------------------------------------------------
+  0. s2-parallel-4              2.6 KB       6.4 GB/s     985      18 MB
+  1. s2-parallel-8              2.6 KB       5 GB/s       988      19.1 MB
+  2. s2-default                 2.6 KB       4.8 GB/s     1109     19.1 MB
+  3. s2-better                  2.6 KB       4.4 GB/s     1123     20.2 MB
+  4. pgzip                      188.7 KB     3.8 GB/s     1185     24.7 MB
+  5. deflate-default            132.6 KB     3.3 GB/s     31       1.6 MB
+  6. pgzip-best-speed           188.8 KB     2.7 GB/s     1236     33.7 MB
+  7. deflate-best-speed         132.7 KB     2.2 GB/s     30       1.3 MB
+  8. zstd                       14.4 KB      2.1 GB/s     3151     19.3 MB
+  9. zstd-fastest               26.6 KB      2.1 GB/s     6220     9.9 MB
+ 10. zstd-better-compression    14.4 KB      1.5 GB/s     3138     39 MB
+ 11. gzip-best-speed            162.9 KB     1.1 GB/s     36       1.7 MB
+ 12. gzip                       130.5 KB     346.7 MB/s   33       1.1 MB
+ 13. gzip-best-compression      130.5 KB     346.6 MB/s   33       1.1 MB
+ 14. pgzip-best-compression     140.9 KB     97.7 MB/s    1277     43 MB
+ 15. deflate-best-compression   138.2 KB     76.2 MB/s    31       1.7 MB
+
+rm -v -i ./test1.img
+```
+
+As soon as the throughput of compression is higher than I/O, compression is no longer the bottleneck. Therefore, any higher compression basically comes as free.
+
+In this example, for a repository in (/dev/sda) /vol we could use deflate-default for a balance betwenn speed/memory/compression.
+
+For a repository in /dev/sdb we could use deflate-default for a balance betwenn speed/memory/compression.
+
+We are going to set the compression globally:
+
+```sh
+kopia policy set --global --compression=deflate-default
+```
+
+Create a `.kopiaignore` file for the $HOME folder:
+
+```
+tee ~/.kopiaignore << END
+# Ignore folders within the parent directory
+/Downloads
+/.cache
+/.mozilla
+/.local/state
+/.local/share
+
+# Ignore hot files and folders
+/hot
+.netrc
+
+# Ignore files and folders provided by .dotfiles
+/scripts
+.bashrc
+.zshrc
+.gitconfig
+
+# Ignore any .LOCK file
+*.LOCK
+
+# Ignore files
+.sudo_as_admin_successful
+
+# Ignore any folder beginning with _ within the parent directory
+/[_]*
+
+END
+```
+
+Inspect if there are more files or folders to ignore and edit `~/.kopiaignore` if needed.
+
+Create a local repository in `/vol/_backup`.
+
+Create a policy for doing manual snapshots of the `$HOME`.
+This snapshots are just in case meanwhile we finish the machine setup.
+
+Create an snapshot using the new policy.
+
+Let's check if every thing was ok with the snapshot and if we need to ignore more files or folders, if that is the case, edit `~/.kopiaignore` acordingly, delete the snapshot, take a new one and do the verification again.
+
+To mount a particular snapshot use the root id:
+
+```sh
+mkdir /tmp/mnt
+kopia mount kcac3c69f604a9eeb3e7dbdd8c5135a17 /tmp/mnt &
+umount /tmp/mnt
+```
+
+To mount the `latest` snapshots of the repository:
+
+```sh
+mkdir /tmp/mnt
+kopia mount all /tmp/mnt &
+umount /tmp/mnt
+```
+
+When the special path `all` is used, the whole repository with its latest snapshot version is mounted.

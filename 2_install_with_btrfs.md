@@ -311,4 +311,4 @@ sudo apt autoclean
 flatpak update
 ```
 
-14. Reboot.
+14. **IF BARE METAL**: Reboot.

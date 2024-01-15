@@ -5,12 +5,10 @@
 1. Install vm-tools:
 
 ```sh
-sudo apt install open-vm-tools-desktop
+sudo apt install -y open-vm-tools-desktop
 ```
 
 2. Enable browser extensions: <https://extensions.gnome.org/#>
-
-3. Reboot.
 
 **IF BARE METAL**: Follow the instructions below to enable hibernation.
 

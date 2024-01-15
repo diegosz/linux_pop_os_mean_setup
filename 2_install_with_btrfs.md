@@ -28,7 +28,7 @@ sudo -i
 
 # Mount the btrfs top-level root filesystem with zstd compression
 cryptsetup luksOpen /dev/sdb3 cryptdata
-# Enter passphrase for /dev/sda3
+# Enter passphrase for /dev/sdb3
 mount -o subvolid=5,defaults,compress=zstd:1,discard=async /dev/mapper/data-root /mnt
 
 # Create btrfs subvolumes @ and @home

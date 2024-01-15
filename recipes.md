@@ -46,7 +46,7 @@ Possibility 1: You have to enter the password which you want to delete (it will
 automatically find the correct password slot)
 
 ```sh
-sudo cryptsetup luksRemoveKey /dev/sda3
+sudo cryptsetup luksRemoveKey /dev/sdb3
 ```
 
 Possibility 2: This will delete password slot 2 (you have to enter the password
@@ -54,7 +54,7 @@ of any other password slot, but not of slot 2. This works even if you don't know
 the password of slot 2.
 
 ```sh
-sudo cryptsetup luksKillSlot /dev/sda3 2
+sudo cryptsetup luksKillSlot /dev/sdb3 2
 ```
 
 ## eCryptfs Encryption

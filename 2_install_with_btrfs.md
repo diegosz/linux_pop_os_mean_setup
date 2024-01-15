@@ -13,7 +13,7 @@ References:
 **IF VIRTUAL MACHINE**: Install vm-tools so is easier to copy and paste:
 
 ```sh
-sudo apt install open-vm-tools-desktop
+sudo apt install -y open-vm-tools-desktop
 ```
 
 **IF BARE METAL**: Open `gparted`, delete the swap partition and resize the main
@@ -46,7 +46,7 @@ mv /mnt/@/home/* /mnt/@home/
 ls -a /mnt/@/home
 # . ..
 ls -a /mnt/@home
-# . .. wmutschl
+# . .. <user_folder>
 
 btrfs subvolume list /mnt
 # ID 264 gen 339 top level 5 path @
@@ -208,7 +208,6 @@ cat /mnt/@/boot/efi/loader/loader.conf
 Create a chroot environment and update initramfs:
 
 ```sh
-echo $KERNEL_OPTS
 cd /
 umount -l /mnt
 mount -o subvol=@,defaults,compress=zstd:1,discard=async /dev/mapper/data-root /mnt

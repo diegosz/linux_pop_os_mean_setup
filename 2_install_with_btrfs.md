@@ -10,6 +10,9 @@ References:
 
 1. Do mutschler_pop-os-btrfs-22-04 Step 1 complete.
 
+Open `gparted`, delete the swap partition and resize the main partition to get
+the new free space.
+
 2. Do mutschler_pop-os-btrfs-22-04 Step 2 complete.
 
 3. Start mutschler_pop-os-btrfs-22-04 Step 3.
@@ -18,7 +21,7 @@ References:
 sudo -i
 
 # Mount the btrfs top-level root filesystem with zstd compression
-cryptsetup luksOpen /dev/sda3 cryptdata
+cryptsetup luksOpen /dev/sdb3 cryptdata
 # Enter passphrase for /dev/sda3
 mount -o subvolid=5,defaults,compress=zstd:1,discard=async /dev/mapper/data-root /mnt
 
@@ -79,11 +82,9 @@ mkswap /mnt/@swap/swapfile
 
 ```sh
 # Comment out the current swap from fstab
-sudo sed -i 's!^/dev/mapper/ctest
-Brewfile.lock.json
-ryptswap!# &!' /etc/fstab
+sed -i 's!^/dev/mapper/cryptswap!# &!' /etc/fstab
 # Optionally, comment out the current swap from crypttab
-sudo sed -i 's!^cryptswap!# &!' /etc/crypttab
+sed -i 's!^cryptswap!# &!' /etc/crypttab
 ```
 
 6. We found the swapfile offset following some steps from
@@ -92,10 +93,9 @@ sudo sed -i 's!^cryptswap!# &!' /etc/crypttab
 ```sh
 curl -s "https://raw.githubusercontent.com/osandov/osandov-linux/master/scripts/btrfs_map_physical.c" > bmp.c
 gcc -O2 -o bmp bmp.c
-swp_offset=$(echo "$(sudo ./bmp /swap/swapfile | egrep "^0\s+" | cut -f9) / $(getconf PAGESIZE)" | bc) && echo $swp_offset
 
 SWAP_UUID=$(blkid -s UUID -o value /dev/mapper/data-root)
-SWAP_OFFSET=$(echo "$(sudo ./bmp /swap/swapfile | egrep "^0\s+" | cut -f9) / $(getconf PAGESIZE)" | bc)
+SWAP_OFFSET=$(echo "$(./bmp /mnt/@swap/swapfile | egrep "^0\s+" | cut -f9) / $(getconf PAGESIZE)" | bc)
 KERNEL_OPTS="resume=UUID=$SWAP_UUID resume_offset=${SWAP_OFFSET/../}"
 echo $KERNEL_OPTS
 # we are going to copy and paste the $KERNEL_OPTS value later...
@@ -139,7 +139,7 @@ cat /mnt/@/etc/crypttab
 cryptdata UUID=f5587dee-374e-4ab9-afdd-b6a4f5530254 none luks,discard
 ```
 
-Adjust configuration of kernelstub. Here you need to add rootflags=subvol=@ to
+Adjust configuration of kernelstub. Here you need to add rootflags=subvol=@ to 
 the "user" kernel options:
 
 ```sh
@@ -190,8 +190,7 @@ cat /mnt/@/boot/efi/loader/entries/Pop_OS-current.conf
 # options root=UUID=UUID_of_data-root ro quiet loglevel=0 systemd.show_status=false splash rootflags=subvol=@
 ```
 
-Optionally, I like to add a timeout to the systemd boot menu in order to easily
-access the recovery partition:
+Optionally, I like to add a timeout to the systemd boot menu in order to easily access the recovery partition:
 
 ```sh
 echo "timeout 3" >> /mnt/@/boot/efi/loader/loader.conf
@@ -203,6 +202,7 @@ cat /mnt/@/boot/efi/loader/loader.conf
 Create a chroot environment and update initramfs:
 
 ```sh
+echo $KERNEL_OPTS
 cd /
 umount -l /mnt
 mount -o subvol=@,defaults,compress=zstd:1,discard=async /dev/mapper/data-root /mnt
@@ -224,7 +224,7 @@ mount -av
 
 ```sh
 # Copy and paste the previous $KERNEL_OPTS
-KERNEL_OPTS=<value>
+KERNEL_OPTS="<value>"
 echo $KERNEL_OPTS
 kernelstub -a "$KERNEL_OPTS"
 echo "$KERNEL_OPTS" | tee -a /etc/initramfs-tools/conf.d/resume
@@ -240,7 +240,6 @@ update-initramfs -c -k all
 
 ```sh
 # Exit the chroot.
-
 exit
 ```
 
@@ -263,7 +262,6 @@ sudo mount -v | grep /dev/mapper
 /dev/mapper/data-root on /swap type btrfs (rw,noatime,compress=zstd:1,ssd,discard=async,space_cache=v2,subvolid=258,subvol=/@swap)
 
 sudo swapon
-[sudo] password for diegos: 
 NAME           TYPE SIZE USED PRIO
 /swap/swapfile file  33G   0B   -2
 

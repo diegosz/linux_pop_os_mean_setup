@@ -9,13 +9,13 @@ References:
 ### Add LUKS passphrase
 
 ```sh
-sudo cryptsetup luksAddKey /dev/sdb3
+sudo cryptsetup luksAddKey /dev/sda3
 Enter any existing passphrase:
 Enter new passphrase for key slot:
 Verify passphrase:
 
 # Verify new passphrase
-sudo cryptsetup --verbose open --test-passphrase /dev/sdb3
+sudo cryptsetup --verbose open --test-passphrase /dev/sda3
 ```
 
 ### Change LUKS passphrase
@@ -25,19 +25,19 @@ sudo cat /etc/crypttab
 cryptdata UUID=f5587dee-374e-4ab9-afdd-b6a4f5530254 none luks,discard
 
 # Test old passphrase
-sudo cryptsetup --verbose open --test-passphrase /dev/sdb3
+sudo cryptsetup --verbose open --test-passphrase /dev/sda3
 No usable token is available.
-Enter passphrase for /dev/sdb3: 
+Enter passphrase for /dev/sda3: 
 Key slot 0 unlocked.
 Command successful.
 
-sudo cryptsetup luksChangeKey /dev/sdb3 -S 0
+sudo cryptsetup luksChangeKey /dev/sda3 -S 0
 Enter passphrase to be changed:
 Enter new passphrase:
 Verify passphrase:
 
 # Verify new passphrase
-sudo cryptsetup --verbose open --test-passphrase /dev/sdb3
+sudo cryptsetup --verbose open --test-passphrase /dev/sda3
 ```
 
 ### Remove a password slot
@@ -46,7 +46,7 @@ Possibility 1: You have to enter the password which you want to delete (it will
 automatically find the correct password slot)
 
 ```sh
-sudo cryptsetup luksRemoveKey /dev/sdb3
+sudo cryptsetup luksRemoveKey /dev/sda3
 ```
 
 Possibility 2: This will delete password slot 2 (you have to enter the password
@@ -54,7 +54,7 @@ of any other password slot, but not of slot 2. This works even if you don't know
 the password of slot 2.
 
 ```sh
-sudo cryptsetup luksKillSlot /dev/sdb3 2
+sudo cryptsetup luksKillSlot /dev/sda3 2
 ```
 
 ## eCryptfs Encryption

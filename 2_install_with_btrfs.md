@@ -27,8 +27,8 @@ partition to get the new free space.
 sudo -i
 
 # Mount the btrfs top-level root filesystem with zstd compression
-cryptsetup luksOpen /dev/sdb3 cryptdata
-# Enter passphrase for /dev/sdb3
+cryptsetup luksOpen /dev/sda3 cryptdata
+# Enter passphrase for /dev/sda3
 mount -o subvolid=5,defaults,compress=zstd:1,discard=async /dev/mapper/data-root /mnt
 
 # Create btrfs subvolumes @ and @home
@@ -186,7 +186,7 @@ VERY IMPORTANT: Don’t forget to put a comma after "splash"
 Adjust configuration of systemd bootloader:
 
 ```sh
-mount /dev/sdb1 /mnt/@/boot/efi
+mount /dev/sda1 /mnt/@/boot/efi
 
 sed -i 's/splash/splash rootflags=subvol=@/' /mnt/@/boot/efi/loader/entries/Pop_OS-current.conf
 cat /mnt/@/boot/efi/loader/entries/Pop_OS-current.conf

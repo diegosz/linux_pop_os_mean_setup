@@ -16,12 +16,12 @@ References:
 sudo blkid
 /dev/mapper/cryptdata: UUID="TVajpY-EKAZ-jJ6s-39nQ-CtRg-GdkX-qQSk6s" TYPE="LVM2_member"
 /dev/mapper/data-root: UUID="8062bdbc-fb55-4f0d-8426-033241b86402" UUID_SUB="dfda8dd3-1810-47f4-b971-21f756d5a0ea" BLOCK_SIZE="4096" TYPE="btrfs"
-/dev/sdb2: UUID="3340-2759" BLOCK_SIZE="512" TYPE="vfat" PARTLABEL="recovery" PARTUUID="b8803837-5c66-4f4d-844b-5caa44195fc4"
-/dev/sdb3: UUID="f5587dee-374e-4ab9-afdd-b6a4f5530254" TYPE="crypto_LUKS" PARTUUID="d98ed4d8-2f66-4bb7-98e4-cf4c224135cf"
-/dev/sdb1: UUID="3340-27C4" BLOCK_SIZE="512" TYPE="vfat" PARTUUID="397e9bb5-11ae-460c-b5f7-b13890914655"
-/dev/sda1: UUID="52164e25-3e48-42f1-93ba-b14058c03ab4" BLOCK_SIZE="4096" TYPE="ext4" PARTLABEL="data" PARTUUID="33d3efb9-57fe-47a6-ad69-16d567b2a2fd"
+/dev/sda2: UUID="3340-2759" BLOCK_SIZE="512" TYPE="vfat" PARTLABEL="recovery" PARTUUID="b8803837-5c66-4f4d-844b-5caa44195fc4"
+/dev/sda3: UUID="f5587dee-374e-4ab9-afdd-b6a4f5530254" TYPE="crypto_LUKS" PARTUUID="d98ed4d8-2f66-4bb7-98e4-cf4c224135cf"
+/dev/sda1: UUID="3340-27C4" BLOCK_SIZE="512" TYPE="vfat" PARTUUID="397e9bb5-11ae-460c-b5f7-b13890914655"
+/dev/sdb1: UUID="52164e25-3e48-42f1-93ba-b14058c03ab4" BLOCK_SIZE="4096" TYPE="ext4" PARTLABEL="data" PARTUUID="33d3efb9-57fe-47a6-ad69-16d567b2a2fd"
 
-echo "UUID=$(blkid -s UUID -o value /dev/sda1)  /vol ext4 defaults,auto,users,rw,nofail,x-systemd.device-timeout=30 0 0" | sudo tee -a /etc/fstab
+echo "UUID=$(blkid -s UUID -o value /dev/sdb1)  /vol ext4 defaults,auto,users,rw,nofail,x-systemd.device-timeout=30 0 0" | sudo tee -a /etc/fstab
 
 sudo mkdir /vol
 
@@ -435,10 +435,10 @@ As soon as the throughput of compression is higher than I/O, compression is no
 longer the bottleneck. Therefore, any higher compression basically comes as
 free.
 
-In this example, for a repository in (/dev/sda) /vol we could use
+In this example, for a repository in (/dev/sdb) /vol we could use
 deflate-default for a balance between speed/memory/compression.
 
-For a repository in /dev/sdb we could use deflate-default for a balance between
+For a repository in /dev/sda we could use deflate-default for a balance between
 speed/memory/compression.
 
 We are going to set the compression globally:

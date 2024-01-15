@@ -57,8 +57,8 @@ sudo locale-gen pt_BR.UTF.8
 sudo update-locale LANG=en_US.UTF-8
 ```
 
-In Region Settings open “Manage Installed Languages”, do not update these, but
-first remove the unnecessary ones. Then reopen “languages” and update these.
+In Region Settings open “Manage Installed Languages”, do not update, but
+first remove the unnecessary ones. Then reopen “languages” and update.
 
 ## Install updates and reboot
 
@@ -79,7 +79,7 @@ sudo reboot now
 ## Enable snap support
 
 ```sh
-sudo apt install snapd
+sudo apt install -y snapd
 ```
 
 ## Some system utilities
@@ -106,12 +106,6 @@ Right-click context menu in nautilus for admin
 sudo apt install -y nautilus-admin
 ```
 
-### Nautilus open in Vscode
-
-```sh
-wget -qO- https://raw.githubusercontent.com/harry-cpp/code-nautilus/master/install.sh | bash
-```
-
 ### Git related packages
 
 ```sh
@@ -125,14 +119,22 @@ git-lfs install
 sudo apt install -y code
 ```
 
+### Nautilus open in Vscode
+
+```sh
+wget -qO- https://raw.githubusercontent.com/harry-cpp/code-nautilus/master/install.sh | bash
+```
+
+### Java JDK
+
+```sh
+sudo apt install -y default-jdk
+```
+
 ### Tools
 
 ```sh
-sudo apt install -y meld
-sudo apt install -y htop
-sudo apt install -y tmux
-sudo apt install -y tree
-sudo apt install -y imagemagick-6.q16hdri libmagickcore-6.q16hdri-6-extra
+sudo apt install -y meld htop tmux tree imagemagick-6.q16hdri libmagickcore-6.q16hdri-6-extra
 ```
 
 ### Install with Pop Shop
@@ -167,48 +169,48 @@ sudo nano /etc/inputrc
 
 ## Settings
 
-- Turn off bluetooth
-
-Desktop:
-    Desktop Options:
-        - Show Maximize Button.
-    Background:
-        - Change Background.
-    Dock:
-        - Deactivate Extend dock to the edges of the screen.
-        - Deactivate Show Launcher Icon in Dock.
-        - Deactivate Show Workspaces Icon in Dock.
-        - Deactivate Show Applications Icon in Dock.
-        - Dock visibility: intelligently hide
-        - Show Dock on Display: All Displays
-        - Dock Size: Small
-    Workspaces:
-        - Set Fixed Number of Workspaces.
-Privacy:
-    File History & Trash:
-        - Automatically delete file history in 30 days
-        - Automatically delete temporary files and trash in 30 days
-    Screen:
-        - Turn of screen after 15 min with automatic screen lock.
-Sound:
-    - Mute mic
-Power:
-    - Disable Automatic Suspend.
-    - Turn on hibernate for power button.
-    - Enable Show Battery Percentage.
-Displays:
-    - Turn on night mode Manual Schedule 20:00 to 06:00
-Mouse & Touchpad:
-    - Turn on natural scroll for mouse touchpad.
-    - Go through keyboard shortcuts and adapt:
-        - Remove super+l super+h
-        - Assign additional super+l to Lock screen
-        - Assign additional super+w to Show workspaces
-        - Custom Shortcut: xkill ctrl+alt+backspace
-User:
-    - Change avatar image.
-Date & TIme:
-    - Change clock to 24h format
+- Bluetooth:
+  - Turn off
+- Desktop:
+  - Desktop Options:
+    - Show Maximize Button.
+    - Background:
+      - Change Background.
+  - Dock:
+    - Deactivate Extend dock to the edges of the screen.
+    - Deactivate Show Launcher Icon in Dock.
+    - Deactivate Show Workspaces Icon in Dock.
+    - Deactivate Show Applications Icon in Dock.
+    - Dock visibility: intelligently hide
+    - Show Dock on Display: All Displays
+    - Dock Size: Small
+  - Workspaces:
+    - Set Fixed Number of Workspaces.
+- Privacy:
+  - File History & Trash:
+    - Automatically delete file history in 30 days
+    - Automatically delete temporary files and trash in 30 days
+  - Screen:
+    - Turn of screen after 15 min with automatic screen lock.
+- Sound:
+  - Mute mic
+- Power:
+  - Disable Automatic Suspend.
+  - Turn on hibernate for power button.
+  - Enable Show Battery Percentage.
+- Displays:
+  - Turn on night mode Manual Schedule 20:00 to 06:00
+- Mouse & Touchpad:
+  - Turn on natural scroll for mouse touchpad.
+  - Go through keyboard shortcuts and adapt:
+    - Remove super+l super+h
+    - Assign additional super+l to Lock screen
+    - Assign additional super+w to Show workspaces
+    - Custom Shortcut: xkill ctrl+alt+backspace
+- User:
+  - Change avatar image.
+- Date & TIme:
+  - Change clock to 24h format
 
 ## Gnome-tweaks
 

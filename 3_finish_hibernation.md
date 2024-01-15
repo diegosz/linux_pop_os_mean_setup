@@ -1,5 +1,19 @@
 # Complete the hibernate setup
 
+**IF VIRTUAL MACHINE**:
+
+1. Install vm-tools:
+
+```sh
+sudo apt install open-vm-tools-desktop
+```
+
+2. Enable browser extensions: <https://extensions.gnome.org/#>
+
+3. Reboot.
+
+**IF BARE METAL**: Follow the instructions below to enable hibernation.
+
 Reference: [Suspending to Disk in Ubuntu-based Distro with BTRFS filesystem | Chuma's Journal](https://journal.chumaumenze.com/entries/suspending-to-disk-in-ubuntu-based-distro-with-btrfs-filesystem/#test-and-enable-hibernation)
 
 1. Disable the default Zram
@@ -27,7 +41,7 @@ sudo reboot now
 systemctl hibernate
 ```
 
-3. Install browser extension: <https://extensions.gnome.org/#>
+3. Enable browser extensions: <https://extensions.gnome.org/#>
 
 4. Add Hibernate and Hybrid Sleep options to the power menu, using GNOME-Shell
    extension:
@@ -51,4 +65,4 @@ EOF
 
 6. Ensure hibernation works by using the Power Off/ Log Out menu.
 
-Reboot.
+7. Reboot.

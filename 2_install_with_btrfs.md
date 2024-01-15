@@ -10,8 +10,14 @@ References:
 
 1. Do mutschler_pop-os-btrfs-22-04 Step 1 complete.
 
-Open `gparted`, delete the swap partition and resize the main partition to get
-the new free space.
+**IF VIRTUAL MACHINE**: Install vm-tools so is easier to copy and paste:
+
+```sh
+sudo apt install open-vm-tools-desktop
+```
+
+**IF BARE METAL**: Open `gparted`, delete the swap partition and resize the main
+partition to get the new free space.
 
 2. Do mutschler_pop-os-btrfs-22-04 Step 2 complete.
 
@@ -47,7 +53,7 @@ btrfs subvolume list /mnt
 # ID 265 gen 340 top level 5 path @home
 ```
 
-4. We do some steps from chumaumenze_suspending-to-disk:
+4. **IF BARE METAL**: We do some steps from chumaumenze_suspending-to-disk:
 
 ```sh
 # Create a @swap sub-volume
@@ -78,7 +84,7 @@ chmod 0600 /mnt/@swap/swapfile
 mkswap /mnt/@swap/swapfile
 ```
 
-5. We do some modified steps from dawaltconley_using-a-swapfile:
+5. **IF BARE METAL**: We do some modified steps from dawaltconley_using-a-swapfile:
 
 ```sh
 # Comment out the current swap from fstab
@@ -87,7 +93,7 @@ sed -i 's!^/dev/mapper/cryptswap!# &!' /etc/fstab
 sed -i 's!^cryptswap!# &!' /etc/crypttab
 ```
 
-6. We found the swapfile offset following some steps from
+6. **IF BARE METAL**: We found the swapfile offset following some steps from
    manjaro_howto-enable-and-configure-hibernation-with-btrfs:
 
 ```sh
@@ -108,7 +114,7 @@ sed -i 's/btrfs  defaults/btrfs  defaults,subvol=@,compress=zstd:1,discard=async
 echo "UUID=$(blkid -s UUID -o value /dev/mapper/data-root)  /home  btrfs  defaults,subvol=@home,compress=zstd:1,discard=async   0 0" >> /mnt/@/etc/fstab
 ```
 
-8. We do some modified steps from chumaumenze_suspending-to-disk:
+8. **IF BARE METAL**: We do some modified steps from chumaumenze_suspending-to-disk:
 
 ```sh
 echo "UUID=$(blkid -s UUID -o value /dev/mapper/data-root)  /swap btrfs defaults,subvol=@swap,nodatacow,noatime,nospace_cache,compress=no 0 0" >> /mnt/@/etc/fstab
@@ -213,14 +219,21 @@ for i in /dev /dev/pts /proc /sys /run; do mount -B $i /mnt$i; done
 chroot /mnt
 ```
 
-Inside the chroot:
+Now we are inside the chroot.
+
+10. **IF BARE METAL**: We create the mount point for the swap:
 
 ```sh
 mkdir swap
+```
+
+11. We mount everything:
+
+```sh
 mount -av
 ```
 
-10. We do some modified steps from chumaumenze_suspending-to-disk:
+12. **IF BARE METAL**: We do some modified steps from chumaumenze_suspending-to-disk:
 
 ```sh
 # Copy and paste the previous $KERNEL_OPTS
@@ -231,14 +244,15 @@ echo "$KERNEL_OPTS" | tee -a /etc/initramfs-tools/conf.d/resume
 
 cat /etc/initramfs-tools/conf.d/resume
 resume=UUID=8062bdbc-fb55-4f0d-8426-033241b86402 resume_offset=902840
-
-update-initramfs -c -k all
 ```
 
-9. We continue mutschler_pop-os-btrfs-22-04 from "Step 4: Reboot, some checks,
-   and system updates":
+13. We update the initramfs to make it aware of our changes to the kernelstub and
+   continue mutschler_pop-os-btrfs-22-04 from "Step 4: Reboot, some checks, and
+   system updates":
 
 ```sh
+update-initramfs -c -k all
+
 # Exit the chroot.
 exit
 ```
@@ -246,6 +260,9 @@ exit
 Close the terminal and finally hit Reboot Device on the installer app. Cross
 your fingers! If all went well you should see a passphrase prompt, where you
 enter the luks passphrase and your system should boot.
+
+> Note: THe ouput of the following commands will vary depending if we make
+> changes to swap or not.
 
 ```sh
 sudo mount -av
@@ -295,4 +312,4 @@ sudo apt autoclean
 flatpak update
 ```
 
-Reboot.
+14. Reboot.

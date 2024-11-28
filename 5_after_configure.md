@@ -57,8 +57,7 @@ sudo locale-gen pt_BR.UTF.8
 sudo update-locale LANG=en_US.UTF-8
 ```
 
-In Region Settings open “Manage Installed Languages”, do not update, but
-first remove the unnecessary ones. Then reopen “languages” and update.
+In Region Settings open “Manage Installed Languages”, do not update, but first remove the unnecessary ones. Then reopen “languages” and update.
 
 ## Install updates and reboot
 
@@ -69,7 +68,7 @@ sudo apt dist-upgrade
 sudo apt autoremove
 sudo apt autoclean
 sudo fwupdmgr get-devices
-sudo fwupdmgr get-updatesgit-flow-completion.bash
+sudo fwupdmgr get-updates
 sudo fwupdmgr update
 flatpak update
 sudo pop-upgrade recovery upgrade from-release # this updates the recovery partition
@@ -248,9 +247,8 @@ If I want to create a new SSH key, I run e.g.:
 ssh-keygen -t ed25519 -C "my-new-key"
 ```
 
-Usually, however, I restore my `.ssh` folder from my backup. Either way,
-afterwards, one needs to add the file containing your key, usually id_rsa or
-id_ed25519, to the ssh-agent:
+Usually, however, I restore my `.ssh` folder from my backup.
+Either way, afterwards, one needs to add the file containing your key, usually id_rsa or id_ed25519, to the ssh-agent:
 
 ```sh
 # First set the right permission to the restored private keys
@@ -301,26 +299,19 @@ git clone https://github.com/bobthecow/git-flow-completion ~/.oh-my-zsh/custom/p
 
 Download these four ttf files:
 
-- [MesloLGS NF Regular.ttf](
-       https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf)
-- [MesloLGS NF Bold.ttf](
-       https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf)
-- [MesloLGS NF Italic.ttf](
-       https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf)
-- [MesloLGS NF Bold Italic.ttf](
-       https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf)
+- [MesloLGS NF Regular.ttf](https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf)
+- [MesloLGS NF Bold.ttf](https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf)
+- [MesloLGS NF Italic.ttf](https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf)
+- [MesloLGS NF Bold Italic.ttf](https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf)
 
-Double-click on each file and click "Install". This will make `MesloLGS NF` font
-available to all applications on your system.
+Double-click on each file and click "Install".
+This will make `MesloLGS NF` font available to all applications on your system.
 
 Configure your terminal to use this font:
 
 - **Visual Studio Code**: Open *File → Preferences → Settings* (PC) or
      *Code → Preferences → Settings* (Mac), enter `terminal.integrated.fontFamily` in the search box at the top of *Settings* tab and set the value below to `MesloLGS NF`.
-     Consult [this screenshot](
-       https://raw.githubusercontent.com/romkatv/powerlevel10k-media/389133fb8c9a2347929a23702ce3039aacc46c3d/visual-studio-code-font-settings.jpg)
-     to see how it should look like or see [this issue](
-       https://github.com/romkatv/powerlevel10k/issues/671) for extra information.
+     Consult [this screenshot](https://raw.githubusercontent.com/romkatv/powerlevel10k-media/389133fb8c9a2347929a23702ce3039aacc46c3d/visual-studio-code-font-settings.jpg) to see how it should look like or see [this issue](https://github.com/romkatv/powerlevel10k/issues/671) for extra information.
 - **GNOME Terminal** (the default Ubuntu terminal): Open *Terminal → Preferences* and click on the selected profile under *Profiles*. Check *Custom font* under *Text Appearance* and select`MesloLGS NF Regular`.
 
 Configure p10k:
@@ -343,8 +334,7 @@ p10k configure
 # - (1) Verbose instant prompt mode
 ```
 
-Add `fzf-zsh-plugin` to your plugin list - edit `~.zshrc` and change plugins=(...)
-to plugins=(... fzf-zsh-plugin)
+Add `fzf-zsh-plugin` to your plugin list - edit `~.zshrc` and change plugins=(...) to plugins=(... fzf-zsh-plugin)
 
 Make **zsh** the default shell:
 
@@ -433,15 +423,11 @@ NOTICE: The provided input file is too big, using first 134.2 MB.
 rm -v -i ./test1.img
 ```
 
-As soon as the throughput of compression is higher than I/O, compression is no
-longer the bottleneck. Therefore, any higher compression basically comes as
-free.
+As soon as the throughput of compression is higher than I/O, compression is no longer the bottleneck. Therefore, any higher compression basically comes as free.
 
-In this example, for a repository in (/dev/sdb) /vol we could use
-deflate-default for a balance between speed/memory/compression.
+In this example, for a repository in (`/dev/sdb`) `/vol` we could use deflate-default for a balance between speed/memory/compression.
 
-For a repository in /dev/sda we could use deflate-default for a balance between
-speed/memory/compression.
+For a repository in `/dev/sda` we could use deflate-default for a balance between speed/memory/compression.
 
 We are going to set the compression globally:
 
@@ -482,8 +468,7 @@ tee ~/.kopiaignore << END
 END
 ```
 
-Inspect if there are more files or folders to ignore and edit `~/.kopiaignore`
-if needed.
+Inspect if there are more files or folders to ignore and edit `~/.kopiaignore` if needed.
 
 Create a local repository in `/vol/_backup`.
 
@@ -492,9 +477,7 @@ This snapshots are just in case meanwhile we finish the machine setup.
 
 Create an snapshot using the new policy.
 
-Let's check if every thing was ok with the snapshot and if we need to ignore
-more files or folders, if that is the case, edit `~/.kopiaignore` acordingly,
-delete the snapshot, take a new one and do the verification again.
+Let's check if every thing was ok with the snapshot and if we need to ignore more files or folders, if that is the case, edit `~/.kopiaignore` acordingly, delete the snapshot, take a new one and do the verification again.
 
 To mount a particular snapshot use the root id:
 
@@ -512,8 +495,7 @@ kopia mount all /tmp/mnt &
 umount /tmp/mnt
 ```
 
-When the special path `all` is used, the whole repository with its latest
-snapshot version is mounted.
+When the special path `all` is used, the whole repository with its latest snapshot version is mounted.
 
 ### Set development snapshot policy
 

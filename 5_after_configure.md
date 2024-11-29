@@ -201,6 +201,7 @@ sudo nano /etc/inputrc
   - Turn on night mode Manual Schedule 20:00 to 06:00
 - Mouse & Touchpad:
   - Turn on natural scroll for mouse touchpad.
+  - Right-Click with Click in Bottom Right Corner.
   - Go through keyboard shortcuts and adapt:
     - Remove super+l super+h
     - Assign additional super+l to Lock screen
